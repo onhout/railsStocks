@@ -1,0 +1,95 @@
+
+path.candle {
+  stroke: #000000;
+}
+
+path.candle.body {
+  stroke-width: 0;
+}
+
+path.candle.up {
+  fill: #00AA00;
+  stroke: #00AA00;
+}
+
+path.candle.down {
+  fill: #FF0000;
+  stroke: #FF0000;
+}
+
+.ma-0 path.line {
+  fill: none;
+  stroke-width: 1;
+  stroke: #b4a800;
+}
+
+.ma-1 path.line {
+  fill: none;
+  stroke-width: 2;
+  stroke: #e8000d;
+}
+
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 60px;
+}
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+  position: fixed;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  border-right: 1px solid #eee;
+}
+
+/* Sidebar navigation */
+.sidebar {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.sidebar .nav {
+  margin-bottom: 20px;
+}
+
+.sidebar .nav-item {
+  width: 100%;
+}
+
+.sidebar .nav-item + .nav-item {
+  margin-left: 0;
+}
+
+.sidebar .nav-link {
+  border-radius: 0;
+}
+
+/*
+ * Dashboard
+ */
+
+/* Placeholders */
+.placeholders {
+  padding-bottom: 3rem;
+}
+
+.placeholder img {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.input-range {
+  margin-bottom: 30px;
+}
