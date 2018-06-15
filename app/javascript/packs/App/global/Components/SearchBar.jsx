@@ -8,24 +8,28 @@ import {
     InputGroup,
     InputGroupAddon,
     InputGroupButtonDropdown,
+    ListGroup,
+    ListGroupItem,
     Row
 } from 'reactstrap';
+import {searchStock} from '../Utils/utils'
+import debounce from 'lodash/debounce'
 
 class SearchBar extends React.Component {
-    constructor(props) {
-        super(props);
-        this.toggleDropDown = this.toggleDropDown.bind(this);
-        this.toggleSplit = this.toggleSplit.bind(this);
-        this.changeTimeFrameState = this.changeTimeFrameState.bind(this);
-        this.onInputChange = this.onInputChange.bind(this);
-        this.getChart = this.getChart.bind(this);
-        this.state = {
-            dropdownOpen: false,
-            splitButtonOpen: false,
-            timeFrame: "5min",
-            timeFrameText: "5 Mins"
-        };
-    }
+    onInputChange = (event) => {
+        event.persist();
+        debounce(event => {
+            searchStock(event.target.value).then(data => {
+                this.setState({
+                    search_list: data
+                })
+            });
+        }, 1000)(event);
+
+        // this.setState({
+        //     market: event.target.value
+        // });
+    };
 
     toggleDropDown() {
         this.setState({
@@ -46,11 +50,37 @@ class SearchBar extends React.Component {
         })
     }
 
+    constructor(props) {
+        super(props);
+        this.toggleDropDown = this.toggleDropDown.bind(this);
+        this.toggleSplit = this.toggleSplit.bind(this);
+        this.changeTimeFrameState = this.changeTimeFrameState.bind(this);
+        this.onInputChange = this.onInputChange.bind(this);
+        this.getChart = this.getChart.bind(this);
+        this.dropdownList = this.dropdownList.bind(this);
+        this.state = {
+            dropdownOpen: false,
+            splitButtonOpen: false,
+            timeFrame: "5min",
+            timeFrameText: "5 Mins"
+        };
+    }
 
-    onInputChange(event) {
-        this.setState({
-            market: event.target.value
-        });
+    dropdownList() {
+        if (this.state.search_list && !this.state.search_list.error) {
+            return this.state.search_list.map((list) => {
+                return (
+                    <ListGroupItem key={list.symbol} tag="a" href='#' className="justify-content-between">
+                        {list.symbol} - {list.name}
+                    </ListGroupItem>
+                )
+            });
+        } else {
+            return (
+                <p>Search for something...</p>
+            )
+        }
+
     }
 
     getChart(event) {
@@ -75,11 +105,16 @@ class SearchBar extends React.Component {
                             <DropdownItem value={"60min"} onClick={this.changeTimeFrameState}>60 Mins</DropdownItem>
                         </DropdownMenu>
                     </InputGroupButtonDropdown>
-                    <Input placeholder="Market..." onChange={(e) => this.onInputChange(e)}/>
+                    <Input placeholder="Market..." onChange={this.onInputChange}/>
                     <InputGroupAddon addonType="append">
                         <Button color="secondary" onClick={() => this.getChart()}>Get Chart</Button>
                     </InputGroupAddon>
                 </InputGroup>
+                <div>
+                    <ListGroup>
+                        {this.dropdownList()}
+                    </ListGroup>
+                </div>
             </Row>
         )
     }

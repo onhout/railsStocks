@@ -1,10 +1,13 @@
+require 'net/http'
 class ApplicationController < ActionController::Base
   include Response
   include ExceptionHandler
+  attr_accessor :url
   protect_from_forgery with: :null_session
   layout 'application'
 
-  def hello
-    render html: "jello"
+  def initialize
+    super
   end
+
 end

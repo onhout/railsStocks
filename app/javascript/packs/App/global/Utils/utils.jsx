@@ -80,3 +80,13 @@ export async function getQuoteData(stock) {
         console.log(e);
     }
 }
+
+export async function searchStock(query) {
+    try {
+        const res = await fetch('/search?q=' + query);
+        return await res.json();
+    }
+    catch (e) {
+        console.log(e)
+    }
+}

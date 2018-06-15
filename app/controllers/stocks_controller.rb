@@ -1,6 +1,10 @@
 class StocksController < ApplicationController
   before_action :set_stock, only: [:show, :edit, :update, :destroy]
 
+  def initialize
+    super()
+  end
+
   # GET /stocks
   # GET /stocks.json
   def index
@@ -56,6 +60,6 @@ class StocksController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def stock_params
-    params.permit(:title, :description, :market)
+    params.permit(:symbol, :name, :symbol_type)
   end
 end

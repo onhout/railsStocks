@@ -1,3 +1,3 @@
 class Stock < ApplicationRecord
-  validates_presence_of :title, :description, :market
+  validates_presence_of :symbol, :name, :symbol_type
 end

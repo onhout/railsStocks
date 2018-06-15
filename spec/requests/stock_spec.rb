@@ -52,13 +52,13 @@ RSpec.describe "Stocks API", type: :request do
   # Test suite for POST /stocks
   describe 'POST /stocks' do
     # valid payload
-    let(:valid_attributes) {{title: 'AAPL', description: 'blah blah blah', market: 'NASDAQ'}}
+    let(:valid_attributes) {{symbol: 'AAPL', name: 'blah blah blah', symbol_type: 'NASDAQ'}}
 
     context 'when the request is valid' do
       before {post '/stocks', params: valid_attributes}
 
       it 'creates a stock' do
-        expect(json['title']).to eq('AAPL')
+        expect(json['symbol']).to eq('AAPL')
       end
 
       it 'returns status code 201' do
@@ -67,18 +67,18 @@ RSpec.describe "Stocks API", type: :request do
     end
 
     context 'when the request is invalid' do
-      before {post '/stocks', params: {title: 'Foobar'}}
+      before {post '/stocks', params: {symbol: 'Foobar'}}
 
       it 'returns a validation failure message' do
         expect(response.body)
-            .to match(/{\"message\":\"Validation failed: Description can't be blank, Market can't be blank\"}/)
+            .to match(/{\"message\":\"Validation failed: Name can't be blank, Symbol type can't be blank\"}/)
       end
     end
   end
 
   # Test suite for PUT /stocks/:id
   describe 'PUT /stocks/:id' do
-    let(:valid_attributes) {{title: 'MSFT'}}
+    let(:valid_attributes) {{symbol: 'MSFT'}}
 
     context 'when the record exists' do
       before {put "/stocks/#{stock_id}", params: valid_attributes}

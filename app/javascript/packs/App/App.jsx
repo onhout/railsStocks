@@ -1,5 +1,6 @@
 import React from "react";
 import Nav from './global/Components/Nav';
+import SearchBar from './global/Components/SearchBar';
 import "./market/sass/market.scss";
 import {Container} from 'reactstrap';
 
@@ -31,25 +32,28 @@ class Root extends React.Component {
         // }, 15000)
     }
 
-    // stockLookup(market, timeframe) {
-    //     this.setState({market, timeframe});
-    //     getStockData(market, timeframe).then(market_data => {
-    //         this.setState({market_data})
-    //     });
-    //     getStockFundamentals(market, timeframe).then(fundamentals => {
-    //         this.setState({fundamentals})
-    //     });
-    //     getAccountInfo().then(account_data => {
-    //         this.setState({account_data})
-    //     });
-    //     getMarketNews(market).then(market_news => {
-    //         this.setState({market_news})
-    //     });
-    //
-    //     getQuoteData(market).then(quote => {
-    //         this.setState({quote})
-    //     });
-    // }
+    stockLookup(market, timeframe) {
+        this.setState({market, timeframe});
+        console.log(market);
+        console.log(market);
+
+        // getStockData(market, timeframe).then(market_data => {
+        //     this.setState({market_data})
+        // });
+        // getStockFundamentals(market, timeframe).then(fundamentals => {
+        //     this.setState({fundamentals})
+        // });
+        // getAccountInfo().then(account_data => {
+        //     this.setState({account_data})
+        // });
+        // getMarketNews(market).then(market_news => {
+        //     this.setState({market_news})
+        // });
+        //
+        // getQuoteData(market).then(quote => {
+        //     this.setState({quote})
+        // });
+    }
 
     // orderCalculation(quote_price, current_price) {
     //     if (this.state.quote !== undefined && this.state.account_data !== undefined) {
@@ -73,9 +77,9 @@ class Root extends React.Component {
                 <Nav/>
                 {/*<Sidebar sidebarItems={this.state.sidebar_items}*/}
                 {/*onStockSymbolChange={(market, timeframe) => this.stockLookup(market, timeframe)}/>*/}
-                {/*<div className="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">*/}
-                {/*<SearchBar*/}
-                {/*onStockSymbolChange={(market, timeframe) => this.stockLookup(market, timeframe)}/>*/}
+                <div className="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+                    <SearchBar
+                        onStockSymbolChange={(market, timeframe) => this.stockLookup(market, timeframe)}/>
                 {/*<hr/>*/}
                 {/*<Row>*/}
                 {/*<div className="col-sm-12 col-md-8">*/}
@@ -92,7 +96,7 @@ class Root extends React.Component {
                 {/*<hr/>*/}
                 {/*</div>*/}
                 {/*</Row>*/}
-                {/*</div>*/}
+                </div>
             </Container>
         )
     }

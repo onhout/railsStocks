@@ -1,9 +1,9 @@
 class CreateStocks < ActiveRecord::Migration[5.2]
   def change
     create_table :stocks do |t|
-      t.string :title
-      t.string :description
-      t.string :market
+      t.string :symbol
+      t.string :name
+      t.string :symbol_type
 
       t.timestamps
     end
