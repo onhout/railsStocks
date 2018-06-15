@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  include Response
+  include ExceptionHandler
+  protect_from_forgery with: :null_session
   layout 'application'
 
   def hello
-    render template: 'static_pages/home'
+    render html: "jello"
   end
 end
