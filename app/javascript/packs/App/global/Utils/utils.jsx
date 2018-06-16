@@ -7,13 +7,13 @@ function sortByDateAscending(a, b) {
     return a.date - b.date;
 }
 
-export async function getStockData(stock, timeframe) {
+export async function getStockData(stock_id, timeframe) {
     try {
-        const res = await fetch("/market/api?name=" + stock + "&timeframe=" + timeframe);
+        const res = await fetch("/stocks/" + stock_id);
         const block = await res.json();
         let retobj = [];
-        Object.keys(block).forEach(function (key) {
-            let obj = block[key];
+        Object.keys(block["Time Series (5min)"]).forEach(function (key) {
+            let obj = block["Time Series (5min)"][key];
             retobj.push({
                 date: timeParse("%Y-%m-%d %H:%M:%S")(key),
                 open: +obj["1. open"],
@@ -30,9 +30,19 @@ export async function getStockData(stock, timeframe) {
 }
 
 
-export async function getStockFundamentals(stock, timeframe) {
+export async function getStockFundamentals(stock) {
     try {
-        const res = await fetch("/market/api/fundamentals?name=" + stock + "&timeframe=" + timeframe);
+        const res = await fetch("https://api.iextrading.com/1.0/stock/" + stock + "/stats");
+        return await res.json();
+    }
+    catch (e) {
+        console.log(e)
+    }
+}
+
+export async function getCompanyInfo(stock) {
+    try {
+        const res = await fetch("https://api.iextrading.com/1.0/stock/" + stock + "/company");
         return await res.json();
     }
     catch (e) {
@@ -42,7 +52,7 @@ export async function getStockFundamentals(stock, timeframe) {
 
 export async function getMarketNews(stock) {
     try {
-        const res = await fetch("/market/api/news?name=" + stock);
+        const res = await fetch("https://api.iextrading.com/1.0/stock/" + stock + "/news");
         return await res.json();
     }
     catch (e) {

@@ -69,3 +69,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'ransack', '1.8.8'
+gem 'alphavantagerb', '1.2.0'
+gem 'prawn', '2.2.2'

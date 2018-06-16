@@ -1,40 +1,91 @@
 import React from 'react';
-import {Badge} from 'reactstrap';
-import numeral from 'numeral';
-import Login from './Login';
 
 class Sidebar extends React.Component {
     constructor(props) {
         super(props);
-        this.navItemHandleClick = this.navItemHandleClick.bind(this);
-        this.state = {market: "", timeframe: ""}
+        this.state = {market: ""}
     }
 
     getNavItems() {
-        if (!this.props.sidebarItems) {
+        if (!this.props.company) {
             return;
         }
-        if (this.props.sidebarItems.detail) {
-            return (
-                <Login onLogOn={() => this.navItemHandleClick("AAPL", "5min")}/>
-            )
-        }
-        return this.props.sidebarItems.map((list) => {
-            let color = list.priceDiff > 0 ? "success" : "danger";
-            return (
-                <li key={list.name} className="nav-item">
-                    <a className="nav-link" onClick={() => this.navItemHandleClick(list.symbol, "5min")}>
-                        {list.symbol} <span className="pull-right"><Badge
-                        color={color}>{numeral(list.priceDiff).format('$0.00')}</Badge></span>
-                    </a>
+        return (
+            <div>
+                <li className="nav-item">
+                    Symbol -
+                    <br/>
+                    <small>
+                        {this.props.company["symbol"]}
+                    </small>
                 </li>
-            )
-        });
-    }
-
-    navItemHandleClick(market, timeframe) {
-        this.setState({market, timeframe});
-        this.props.onStockSymbolChange(market, timeframe);
+                <hr/>
+                <li className="nav-item">
+                    Company Name -
+                    <br/>
+                    <small>
+                        {this.props.company["companyName"]}
+                    </small>
+                </li>
+                <hr/>
+                <li className="nav-item">
+                    Description -
+                    <br/>
+                    <small>
+                        {this.props.company["description"]}
+                    </small>
+                </li>
+                <hr/>
+                <li className="nav-item">
+                    Exchange -
+                    <br/>
+                    <small>
+                        {this.props.company["exchange"]}
+                    </small>
+                </li>
+                <hr/>
+                <li className="nav-item">
+                    Industry -
+                    <br/>
+                    <small>
+                        {this.props.company["industry"]}
+                    </small>
+                </li>
+                <hr/>
+                <li className="nav-item">
+                    Issue Type -
+                    <br/>
+                    <small>
+                        {this.props.company["issueType"]}
+                    </small>
+                </li>
+                <hr/>
+                <li className="nav-item">
+                    Sector -
+                    <br/>
+                    <small>
+                        {this.props.company["sector"]}
+                    </small>
+                </li>
+                <hr/>
+                <li className="nav-item">
+                    CEO -
+                    <br/>
+                    <small>
+                        {this.props.company["CEO"]}
+                    </small>
+                </li>
+                <hr/>
+                <li className="nav-item">
+                    Website -
+                    <br/>
+                    <small>
+                        <a href={this.props.company["website"]}>{this.props.company["website"]}</a>
+                    </small>
+                </li>
+                <hr/>
+            </div>
+        )
     }
 
     render() {

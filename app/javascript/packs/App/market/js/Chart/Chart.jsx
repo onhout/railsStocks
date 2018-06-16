@@ -5,7 +5,7 @@ import {format} from "d3-format";
 import {timeFormat} from "d3-time-format";
 
 import {Chart, ChartCanvas} from "react-stockcharts";
-import {AreaSeries, BarSeries, CandlestickSeries, LineSeries, StochasticSeries,} from "react-stockcharts/lib/series";
+import {AreaSeries, BarSeries, CandlestickSeries, LineSeries,} from "react-stockcharts/lib/series";
 import {XAxis, YAxis} from "react-stockcharts/lib/axes";
 import {
     CrossHairCursor,
@@ -21,10 +21,6 @@ import {ema, sma} from "react-stockcharts/lib/indicator";
 import {fitWidth} from "react-stockcharts/lib/helper";
 import {last} from "react-stockcharts/lib/utils";
 
-const stoAppearance = {
-    stroke: Object.assign({},
-        StochasticSeries.defaultProps.stroke)
-};
 
 class StockCharts extends React.Component {
     constructor(props) {

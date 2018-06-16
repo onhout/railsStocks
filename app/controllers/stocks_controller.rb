@@ -1,7 +1,11 @@
+require "alphavantagerb"
+require "json"
+
 class StocksController < ApplicationController
   before_action :set_stock, only: [:show, :edit, :update, :destroy]
 
   def initialize
+    @alphavantage_client = Alphavantage::Client.new key: "VRU8ZUMHTKPXMW15"
     super()
   end
 
@@ -15,7 +19,19 @@ class StocksController < ApplicationController
   # GET /stocks/1
   # GET /stocks/1.json
   def show
-    json_response(@stock)
+    stock = @alphavantage_client.stock symbol: @stock.symbol
+    data_path = "./stock_data/#{@stock.symbol}.json"
+    Dir.mkdir('./stock_data') unless Dir.exist?('./stock_data')
+    if !File.exist?(data_path)
+      timeseries = stock.timeseries type: "intraday", interval: "5min", outputsize: "full"
+      File.open(data_path, 'w') do |file|
+        file.write(timeseries.hash.to_json)
+        json_response(timeseries.hash)
+      end
+    else
+      timeseries = File.read(data_path)
+      json_response(timeseries)
+    end
   end
 
   # GET /stocks/new

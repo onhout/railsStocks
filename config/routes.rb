@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'main/report', to: 'main#reports'
   resources :stocks
   get 'update_stocksdb', to: 'main#update_stock_db'
   get 'search', to: 'search#find'

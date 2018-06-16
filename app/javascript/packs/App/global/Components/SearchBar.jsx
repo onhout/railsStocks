@@ -26,9 +26,9 @@ class SearchBar extends React.Component {
             });
         }, 1000)(event);
 
-        // this.setState({
-        //     market: event.target.value
-        // });
+        this.setState({
+            market: event.target.value
+        });
     };
 
     toggleDropDown() {
@@ -66,11 +66,21 @@ class SearchBar extends React.Component {
         };
     }
 
+    getSymbolOnInput(stock_id, market) {
+        this.setState({
+            stock_id,
+            market,
+            search_list: ""
+        })
+    }
+
     dropdownList() {
         if (this.state.search_list && !this.state.search_list.error) {
             return this.state.search_list.map((list) => {
                 return (
-                    <ListGroupItem key={list.symbol} tag="a" href='#' className="justify-content-between">
+                    <ListGroupItem key={list.id} tag="a" href="#" className="justify-content-between" onClick={() => {
+                        this.getSymbolOnInput(list.id, list.symbol);
+                    }}>
                         {list.symbol} - {list.name}
                     </ListGroupItem>
                 )
@@ -80,11 +90,10 @@ class SearchBar extends React.Component {
                 <p>Search for something...</p>
             )
         }
-
     }
 
     getChart(event) {
-        this.props.onStockSymbolChange(this.state.market, this.state.timeFrame);
+        this.props.onStockSymbolChange(this.state.stock_id, this.state.market, this.state.timeFrame);
     }
 
     render() {
@@ -93,7 +102,7 @@ class SearchBar extends React.Component {
                 <InputGroup>
                     <InputGroupButtonDropdown addonType="prepend" isOpen={this.state.dropdownOpen}
                                               toggle={this.toggleDropDown}>
-                        <DropdownToggle caret outline>
+                        <DropdownToggle caret outline disabled>
                             {this.state.timeFrameText}
                         </DropdownToggle>
                         <DropdownMenu>
@@ -105,7 +114,7 @@ class SearchBar extends React.Component {
                             <DropdownItem value={"60min"} onClick={this.changeTimeFrameState}>60 Mins</DropdownItem>
                         </DropdownMenu>
                     </InputGroupButtonDropdown>
-                    <Input placeholder="Market..." onChange={this.onInputChange}/>
+                    <Input placeholder="Market..." onChange={this.onInputChange} value={this.state.market || ''}/>
                     <InputGroupAddon addonType="append">
                         <Button color="secondary" onClick={() => this.getChart()}>Get Chart</Button>
                     </InputGroupAddon>

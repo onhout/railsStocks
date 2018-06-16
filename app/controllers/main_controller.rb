@@ -1,7 +1,19 @@
+require 'prawn'
+
 class MainController < ApplicationController
 
   def index
     render template: 'main/index'
+  end
+
+  def reports
+    send_data(generate_pdf, :filename => "report.pdf", :type => "application/pdf")
+  end
+
+  def generate_pdf
+    Prawn::Document.new do
+      text "Hello World"
+    end.render
   end
 
   def update_stock_db
