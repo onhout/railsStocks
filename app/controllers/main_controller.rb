@@ -19,7 +19,7 @@ class MainController < ApplicationController
       gainer = JSON.parse(gainer_res)
       loser = JSON.parse(loser_res)
 
-      text "<font size='24'> Top Gainers </font>", inline_format: true
+      text "<font size='24'> Top Gainers </font>", inline_format: true, align: :center
       gainer.each() do |list|
         float do
           bounding_box [15, cursor], width: 10 do
@@ -36,7 +36,7 @@ class MainController < ApplicationController
         move_down(5)
       end
       start_new_page
-      text "<font size='24'> Top Losers </font>", inline_format: true
+      text "<font size='24'> Top Losers </font>", inline_format: true, align: :center
       loser.each() do |list|
         float do
           bounding_box [15, cursor], width: 10 do

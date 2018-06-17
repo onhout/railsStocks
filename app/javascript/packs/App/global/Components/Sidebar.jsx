@@ -13,7 +13,7 @@ class Sidebar extends React.Component {
         return (
             <div>
                 <li className="nav-item">
-                    Symbol -
+                    Symbol
                     <br/>
                     <small>
                         {this.props.company["symbol"]}
@@ -21,7 +21,7 @@ class Sidebar extends React.Component {
                 </li>
                 <hr/>
                 <li className="nav-item">
-                    Company Name -
+                    Company Name
                     <br/>
                     <small>
                         {this.props.company["companyName"]}
@@ -29,7 +29,7 @@ class Sidebar extends React.Component {
                 </li>
                 <hr/>
                 <li className="nav-item">
-                    Description -
+                    Description
                     <br/>
                     <small>
                         {this.props.company["description"]}
@@ -37,7 +37,7 @@ class Sidebar extends React.Component {
                 </li>
                 <hr/>
                 <li className="nav-item">
-                    Exchange -
+                    Exchange
                     <br/>
                     <small>
                         {this.props.company["exchange"]}
@@ -45,7 +45,7 @@ class Sidebar extends React.Component {
                 </li>
                 <hr/>
                 <li className="nav-item">
-                    Industry -
+                    Industry
                     <br/>
                     <small>
                         {this.props.company["industry"]}
@@ -53,7 +53,7 @@ class Sidebar extends React.Component {
                 </li>
                 <hr/>
                 <li className="nav-item">
-                    Issue Type -
+                    Issue Type
                     <br/>
                     <small>
                         {this.props.company["issueType"]}
@@ -61,7 +61,7 @@ class Sidebar extends React.Component {
                 </li>
                 <hr/>
                 <li className="nav-item">
-                    Sector -
+                    Sector
                     <br/>
                     <small>
                         {this.props.company["sector"]}
@@ -69,7 +69,7 @@ class Sidebar extends React.Component {
                 </li>
                 <hr/>
                 <li className="nav-item">
-                    CEO -
+                    CEO
                     <br/>
                     <small>
                         {this.props.company["CEO"]}
@@ -77,7 +77,7 @@ class Sidebar extends React.Component {
                 </li>
                 <hr/>
                 <li className="nav-item">
-                    Website -
+                    Website
                     <br/>
                     <small>
                         <a href={this.props.company["website"]}>{this.props.company["website"]}</a>
