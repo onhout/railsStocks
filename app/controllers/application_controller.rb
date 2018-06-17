@@ -1,4 +1,4 @@
-require 'net/http'
+
 class ApplicationController < ActionController::Base
   include Response
   include ExceptionHandler

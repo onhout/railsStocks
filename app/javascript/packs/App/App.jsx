@@ -28,7 +28,7 @@ class Root extends React.Component {
     }
 
     componentDidMount() {
-        this.stockLookup(14, "AAPL", "5min");
+        this.stockLookup(13, "AAPL", "5min");
         //
         // setInterval(() => {
         //     getQuoteData(this.state.market).then(quote => {
