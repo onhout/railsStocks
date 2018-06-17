@@ -31,6 +31,22 @@ class SearchBar extends React.Component {
         });
     };
 
+    constructor(props) {
+        super(props);
+        this.toggleDropDown = this.toggleDropDown.bind(this);
+        this.toggleSplit = this.toggleSplit.bind(this);
+        this.changeTimeFrameState = this.changeTimeFrameState.bind(this);
+        this.onInputChange = this.onInputChange.bind(this);
+        this.getChart = this.getChart.bind(this);
+        this.dropdownList = this.dropdownList.bind(this);
+        this.state = {
+            dropdownOpen: false,
+            splitButtonOpen: false,
+            timeFrame: "5min",
+            timeFrameText: "5 Mins"
+        };
+    }
+
     toggleDropDown() {
         this.setState({
             dropdownOpen: !this.state.dropdownOpen
@@ -48,22 +64,6 @@ class SearchBar extends React.Component {
             timeFrame: event.target.value,
             timeFrameText: event.target.innerText
         })
-    }
-
-    constructor(props) {
-        super(props);
-        this.toggleDropDown = this.toggleDropDown.bind(this);
-        this.toggleSplit = this.toggleSplit.bind(this);
-        this.changeTimeFrameState = this.changeTimeFrameState.bind(this);
-        this.onInputChange = this.onInputChange.bind(this);
-        this.getChart = this.getChart.bind(this);
-        this.dropdownList = this.dropdownList.bind(this);
-        this.state = {
-            dropdownOpen: false,
-            splitButtonOpen: false,
-            timeFrame: "5min",
-            timeFrameText: "5 Mins"
-        };
     }
 
     getSymbolOnInput(stock_id, market) {
