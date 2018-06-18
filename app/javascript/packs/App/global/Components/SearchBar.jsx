@@ -13,23 +13,9 @@ import {
     Row
 } from 'reactstrap';
 import {searchStock} from '../Utils/utils'
-import debounce from 'lodash/debounce'
 
 class SearchBar extends React.Component {
-    onInputChange = (event) => {
-        event.persist();
-        debounce(event => {
-            searchStock(event.target.value).then(data => {
-                this.setState({
-                    search_list: data
-                })
-            });
-        }, 1000)(event);
 
-        this.setState({
-            market: event.target.value
-        });
-    };
 
     constructor(props) {
         super(props);
@@ -46,6 +32,18 @@ class SearchBar extends React.Component {
             timeFrameText: "5 Mins"
         };
     }
+
+    onInputChange = (event) => {
+        searchStock(event.target.value).then(data => {
+            this.setState({
+                search_list: data
+            })
+        });
+
+        this.setState({
+            market: event.target.value
+        });
+    };
 
     toggleDropDown() {
         this.setState({

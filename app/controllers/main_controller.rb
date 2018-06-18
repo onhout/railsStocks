@@ -66,4 +66,9 @@ class MainController < ApplicationController
     end
     json_response({message: "Success"})
   end
+
+  def reset_stock_data
+    FileUtils.rm_rf("./stock_data")
+    json_response({message: "Success"})
+  end
 end
