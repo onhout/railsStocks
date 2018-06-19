@@ -1,6 +1,9 @@
 {
   "name": "rails-practice",
   "private": true,
+  "scripts": {
+    "start": "./bin/webpack-dev-server"
+  },
   "dependencies": {
     "@rails/webpacker": "3.5",
     "babel-preset-react": "^6.24.1",
