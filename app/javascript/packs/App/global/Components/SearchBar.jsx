@@ -100,7 +100,7 @@ class SearchBar extends React.Component {
                 <InputGroup>
                     <InputGroupButtonDropdown addonType="prepend" isOpen={this.state.dropdownOpen}
                                               toggle={this.toggleDropDown}>
-                        <DropdownToggle caret outline disabled>
+                        <DropdownToggle caret outline>
                             {this.state.timeFrameText}
                         </DropdownToggle>
                         <DropdownMenu>
