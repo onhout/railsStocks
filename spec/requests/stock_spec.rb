@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "Stocks API", type: :request do
 
-  let!(:stocks) {create_list(:stock, 10)}
-  let(:stock_id) {stocks.first.id}
+  let!(:stocks) { create_list(:stock, 10) }
+  let(:stock_id) { stocks.first.id }
 
   # Test suite for GET /stocks
   describe 'GET /stocks' do
     # make HTTP get request before each example
-    before {get '/stocks'}
+    before { get '/stocks' }
 
     it 'returns stocks' do
       # Note `json` is a custom helper to parse JSON responses
@@ -23,7 +23,7 @@ RSpec.describe "Stocks API", type: :request do
 
   # Test suite for GET /stocks/:id
   describe 'GET /stocks/:id' do
-    before {get "/stocks/#{stock_id}"}
+    before { get "/stocks/#{stock_id}" }
 
     context 'when the record exists' do
       it 'returns the stock' do
@@ -37,7 +37,7 @@ RSpec.describe "Stocks API", type: :request do
     end
 
     context 'when the record does not exist' do
-      let(:stock_id) {100}
+      let(:stock_id) { 100 }
 
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
@@ -52,10 +52,10 @@ RSpec.describe "Stocks API", type: :request do
   # Test suite for POST /stocks
   describe 'POST /stocks' do
     # valid payload
-    let(:valid_attributes) {{symbol: 'AAPL', name: 'blah blah blah', symbol_type: 'NASDAQ'}}
+    let(:valid_attributes) { { symbol: 'AAPL', name: 'blah blah blah', symbol_type: 'NASDAQ' } }
 
     context 'when the request is valid' do
-      before {post '/stocks', params: valid_attributes}
+      before { post '/stocks', params: valid_attributes }
 
       it 'creates a stock' do
         expect(json['symbol']).to eq('AAPL')
@@ -67,7 +67,7 @@ RSpec.describe "Stocks API", type: :request do
     end
 
     context 'when the request is invalid' do
-      before {post '/stocks', params: {symbol: 'Foobar'}}
+      before { post '/stocks', params: { symbol: 'Foobar' } }
 
       it 'returns a validation failure message' do
         expect(response.body)
@@ -78,10 +78,10 @@ RSpec.describe "Stocks API", type: :request do
 
   # Test suite for PUT /stocks/:id
   describe 'PUT /stocks/:id' do
-    let(:valid_attributes) {{symbol: 'MSFT'}}
+    let(:valid_attributes) { { symbol: 'MSFT' } }
 
     context 'when the record exists' do
-      before {put "/stocks/#{stock_id}", params: valid_attributes}
+      before { put "/stocks/#{stock_id}", params: valid_attributes }
 
       it 'updates the record' do
         expect(response.body).to be_empty
@@ -95,7 +95,7 @@ RSpec.describe "Stocks API", type: :request do
 
   # Test suite for DELETE /stocks/:id
   describe 'DELETE /stocks/:id' do
-    before {delete "/stocks/#{stock_id}"}
+    before { delete "/stocks/#{stock_id}" }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

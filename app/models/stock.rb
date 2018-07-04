@@ -14,7 +14,7 @@ class Stock < ApplicationRecord
       q = Stock.ransack(symbol_or_name_cont: params[:q])
       q.result(distinct: true).limit(15)
     else
-      {error: 'invalid search'}
+      { error: 'invalid search' }
     end
   end
 end

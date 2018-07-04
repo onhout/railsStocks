@@ -17,6 +17,18 @@ import {searchStock} from '../Utils/utils'
 class SearchBar extends React.Component {
 
 
+    onInputChange = (event) => {
+        searchStock(event.target.value).then(data => {
+            this.setState({
+                search_list: data
+            })
+        });
+
+        this.setState({
+            market: event.target.value
+        });
+    };
+
     constructor(props) {
         super(props);
         this.toggleDropDown = this.toggleDropDown.bind(this);
@@ -32,18 +44,6 @@ class SearchBar extends React.Component {
             timeFrameText: "5 Mins"
         };
     }
-
-    onInputChange = (event) => {
-        searchStock(event.target.value).then(data => {
-            this.setState({
-                search_list: data
-            })
-        });
-
-        this.setState({
-            market: event.target.value
-        });
-    };
 
     toggleDropDown() {
         this.setState({
