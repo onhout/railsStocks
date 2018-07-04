@@ -9,11 +9,11 @@ function sortByDateAscending(a, b) {
 
 export async function getStockData(stock_id, timeframe) {
     try {
-        const res = await fetch("/stocks/" + stock_id);
+        const res = await fetch("/stocks/" + stock_id + "?interval=" + timeframe);
         const block = await res.json();
         let retobj = [];
-        Object.keys(block["Time Series (5min)"]).forEach(function (key) {
-            let obj = block["Time Series (5min)"][key];
+        Object.keys(block["Time Series (" + timeframe + ")"]).forEach(function (key) {
+            let obj = block["Time Series (" + timeframe + ")"][key];
             retobj.push({
                 date: timeParse("%Y-%m-%d %H:%M:%S")(key),
                 open: +obj["1. open"],

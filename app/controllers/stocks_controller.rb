@@ -20,10 +20,11 @@ class StocksController < ApplicationController
   # GET /stocks/1.json
   def show
     stock = @alphavantage_client.stock symbol: @stock.symbol
-    data_path = "./stock_data/#{@stock.symbol}.json"
+    interval = params[:interval].presence || "5min"
+    data_path = "./stock_data/#{@stock.symbol}-#{interval}.json"
     Dir.mkdir('./stock_data') unless Dir.exist?('./stock_data')
     if !File.exist?(data_path)
-      timeseries = stock.timeseries type: "intraday", interval: "5min", outputsize: "full"
+      timeseries = stock.timeseries type: "intraday", interval: interval, outputsize: "full"
       File.open(data_path, 'w') do |file|
         file.write(timeseries.hash.to_json)
         json_response(timeseries.hash)
